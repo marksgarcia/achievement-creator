@@ -118,7 +118,11 @@ export default {
       { search: "music compact disc", class: "fas", icon: "compact-disc" },
       { search: "music cowbell", class: "fas", icon: "cowbell" },
       { search: "music guitar", class: "fas", icon: "guitar" },
-      { search: "music guitar electric", class: "fas", icon: "guitar-electric" },
+      {
+        search: "music guitar electric",
+        class: "fas",
+        icon: "guitar-electric",
+      },
       { search: "music piano keyboard", class: "fas", icon: "piano-keyboard" },
       { search: "music saxophone", class: "fas", icon: "saxophone" },
       { search: "music violin", class: "fas", icon: "violin" },
@@ -136,8 +140,16 @@ export default {
 
       { search: "space outerspace meteor", class: "fas", icon: "meteor" },
       { search: "space outerspace rocket", class: "fas", icon: "rocket" },
-      { search: "space outerspace starfighter", class: "fas", icon: "starfighter" },
-      { search: "space outerspace starfighter alt", class: "fas", icon: "starfighter-alt" },
+      {
+        search: "space outerspace starfighter",
+        class: "fas",
+        icon: "starfighter",
+      },
+      {
+        search: "space outerspace starfighter alt",
+        class: "fas",
+        icon: "starfighter-alt",
+      },
       { search: "space outerspace starship", class: "fas", icon: "starship" },
       {
         search: "space outerspace starship freighter",
@@ -161,7 +173,11 @@ export default {
       { search: "emoji surprise", class: "fas", icon: "surprise" },
       { search: "emoji dizzy", class: "fas", icon: "dizzy" },
       { search: "emoji grin", class: "fas", icon: "grin" },
-      { search: "emoji grin squint tears", class: "fas", icon: "grin-squint-tears" },
+      {
+        search: "emoji grin squint tears",
+        class: "fas",
+        icon: "grin-squint-tears",
+      },
       { search: "emoji grin stars", class: "fas", icon: "grin-stars" },
       { search: "emoji grin tears", class: "fas", icon: "grin-tears" },
       { search: "emoji grin tongue", class: "fas", icon: "grin-tongue" },
@@ -171,22 +187,38 @@ export default {
         class: "fas",
         icon: "grin-tongue-squint",
       },
-      { search: "emoji grin tongue wink", class: "fas", icon: "grin-tongue-wink" },
+      {
+        search: "emoji grin tongue wink",
+        class: "fas",
+        icon: "grin-tongue-wink",
+      },
       { search: "emoji grin wink", class: "fas", icon: "grin-wink" },
       { search: "emoji laugh", class: "fas", icon: "laugh" },
       { search: "emoji laugh beam", class: "fas", icon: "laugh-beam" },
       { search: "emoji laugh squint", class: "fas", icon: "laugh-squint" },
       { search: "emoji meh", class: "fas", icon: "meh" },
-      { search: "emoji meh rolling eyes", class: "fas", icon: "meh-rolling-eyes" },
+      {
+        search: "emoji meh rolling eyes",
+        class: "fas",
+        icon: "meh-rolling-eyes",
+      },
       { search: "emoji sad cry", class: "fas", icon: "sad-cry" },
       { search: "emoji smile beam", class: "fas", icon: "smile-beam" },
       { search: "emoji smile wink", class: "fas", icon: "smile-wink" },
     ];
     const search = ref("");
     const searchIcons = computed(() => {
-      return icons.filter((icon) =>
-        icon.search.includes(search.value.toLowerCase())
-      );
+      const searchTerm = search.value.toLowerCase().split(" ");
+      console.log(searchTerm);
+      return icons.filter((icon) => {
+        for (let term of searchTerm) {
+          if (search.value === '') {
+            return true;
+          } else if (icon.search.includes(term) && term !== "") {
+            return true;
+          } 
+        }
+      });
     });
     const clearSearch = () => {
       search.value = "";
