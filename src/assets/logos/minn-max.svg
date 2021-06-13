@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500px" height="500px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Orange Copy</title>
+    <g id="Orange-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Logo" transform="translate(3.500000, 132.500000)" fill="#FC5231">
+            <g id="Down-Arrow" transform="translate(117.000000, 117.500000) rotate(-270.000000) translate(-117.000000, -117.500000) translate(-0.500000, 0.500000)">
+                <rect id="Rectangle" x="4.26325641e-14" y="1.61538462" width="235" height="92.3076923"></rect>
+                <polygon id="Rectangle-Copy" transform="translate(188.000000, 117.000000) rotate(-90.000000) translate(-188.000000, -117.000000) " points="72.6153846 70 303.384615 70 303.384615 164 72.6153846 164"></polygon>
+                <polygon id="Rectangle-Copy-2" transform="translate(117.500419, 117.000000) rotate(-45.000000) translate(-117.500419, -117.000000) " points="0.635330272 69.3656807 233.519355 71.4810515 234.365507 164.634319 1.48148225 162.518948"></polygon>
+            </g>
+            <g id="Up-Arrow" transform="translate(258.500000, 1.181353)">
+                <rect id="Rectangle" x="0" y="0.934031349" width="235" height="92.3076923"></rect>
+                <polygon id="Rectangle-Copy" transform="translate(188.000000, 116.318647) rotate(-90.000000) translate(-188.000000, -116.318647) " points="72.6153846 69.3186467 303.384615 69.3186467 303.384615 163.318647 72.6153846 163.318647"></polygon>
+                <polygon id="Rectangle-Copy-2" transform="translate(117.500419, 116.318647) rotate(-45.000000) translate(-117.500419, -116.318647) " points="0.635330272 68.6843275 233.519355 70.7996982 234.365507 163.952966 1.48148225 161.837595"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

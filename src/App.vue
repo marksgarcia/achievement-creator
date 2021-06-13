@@ -1,22 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <AchievementCreator />
+  <AchievementOutput msg="Welcome to Your Vue.js App" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AchievementCreator from "./components/achievement-editor/AchievementCreator.vue";
+import AchievementOutput from "./components/achievement-editor/AchievementOutput.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    AchievementCreator,
+    AchievementOutput,
+  },
+};
 </script>
 
-<style>
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;0,700;1,400&display=swap");
+
+@font-face {
+  font-family: "Croogla 4F";
+  src: local("croogla"),
+   url(./fonts/croogla/Croogla4F.ttf) format("truetype");
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

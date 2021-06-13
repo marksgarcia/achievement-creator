@@ -1,0 +1,41 @@
+
+@mixin animation($name, $duration, $timing, $iteration, $delay) {
+    -webkit-animation: $name $duration $timing $iteration $delay;
+    -moz-animation: $name $duration $timing $iteration $delay;
+    -ms-animation: $name $duration $timing $iteration $delay;
+    -o-animation: $name $duration $timing $iteration $delay;
+    animation: $name $duration $timing $iteration $delay;
+}
+
+@mixin boxshadow($property) {
+    -moz-box-shadow: $property;
+    -ms-box-shadow: $property;
+    -webkit-box-shadow: $property;
+    box-shadow: $property;
+}
+
+@mixin transform($property) {
+    -moz-transform: $property;
+    -ms-transform: $property;
+    -webkit-transform: $property;
+    transform: $property;
+}
+
+@mixin transition($property) {
+    -moz-transition: $property;
+    -ms-transition: $property;
+    -webkit-transition: $property;
+    transition: $property;
+}
+
+@mixin flexbox {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+@mixin tagstate($property) {
+    background: $property;
+    border: 1px solid $property;
+}
