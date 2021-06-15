@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="wrapper" :class="[setBrand, getTheme]">
     <base-achievement id="achievement" :mode="setBrand">
       <minnmax-card v-if="setBrand === 'minnmax'">
         <template v-slot:image
@@ -40,14 +40,15 @@
         <template v-slot:text>
           <div class="text-wrapper" :class="setBrand">
             <base-achievement-header></base-achievement-header
-            ><base-achievement-text></base-achievement-text></div
-        >
-        <span class="ps-logo">
-          <font-awesome-icon :icon="['fab', 'playstation']"></font-awesome-icon>
-        </span>
+            ><base-achievement-text></base-achievement-text>
+          </div>
+          <span class="ps-logo">
+            <font-awesome-icon
+              :icon="['fab', 'playstation']"
+            ></font-awesome-icon>
+          </span>
         </template>
       </playstation-card>
-
     </base-achievement>
     <button @click="saveImage" v-if="filled">
       <font-awesome-icon
@@ -77,19 +78,33 @@ export default {
           FileSaver.saveAs(blob, "achievement.png");
         });
     };
+
     const setBrand = computed(() => {
       return store.getters.getBrand;
+    });
+
+    const getTheme = computed(() => {
+      return store.getters.getTheme;
     });
 
     const filled = computed(() => {
       return store.getters.getHeader !== "" && store.getters.getText !== "";
     });
 
-    return { saveImage, filled, setBrand };
+    return { saveImage, filled, setBrand, getTheme };
   },
 };
 </script>
 <style lang="scss" scoped>
+.wrapper {
+  border-radius: 20px;
+  padding: 1em;
+}
+
+.wrapper.minnmax.light {
+  background: #eaeaea;
+}
+
 section {
   @include flexbox();
   align-items: center;
@@ -144,7 +159,7 @@ section {
   }
 
   button {
-    background: none;
+    background: #fff;
     border: 3px solid #333333;
     border-radius: 4em;
     color: #333333;

@@ -214,6 +214,7 @@ library.add(
 // Base Components
 import BaseHeader from "./components/ui/BaseHeader.vue";
 import BaseCheckbox from "./components/ui/BaseCheckbox.vue";
+import BaseRadioButton from "./components/ui/BaseRadioButton.vue";
 import BaseInput from "./components/ui/BaseInput.vue";
 import BaseImageUpload from "./components/ui/BaseImageUpload.vue";
 import BaseAchievement from "./components/ui/BaseAchievement.vue";
@@ -226,6 +227,7 @@ app.component("font-awesome-icon", FontAwesomeIcon);
 app.component("base-image-upload", BaseImageUpload);
 app.component("base-header", BaseHeader);
 app.component("base-checkbox", BaseCheckbox);
+app.component("base-radio-button", BaseRadioButton);
 app.component("base-input", BaseInput);
 app.component("base-achievement", BaseAchievement);
 app.component("base-achievement-image", BaseAchievementImage);

@@ -1,5 +1,5 @@
 <template>
-  <div class="achievement-card" :class="mode">
+  <div class="achievement-card" :class="[mode, getTheme]">
     <slot></slot>
   </div>
 </template>
@@ -13,7 +13,11 @@ export default {
     const imageUploaded = computed(() => {
       return store.getters.getImage !== "";
     });
-    return { imageUploaded };
+
+    const getTheme = computed(() => {
+      return store.getters.getTheme;
+    });
+    return { imageUploaded, getTheme};
   },
 };
 </script>
@@ -26,6 +30,14 @@ export default {
   border-radius: 40px;
   height: 126px;
   width: 600px;
+}
+
+.achievement-card.minnmax.light {
+  background: #ffffff;
+}
+
+.achievement-card.minnmax.dark {
+  background: #393b41;
 }
 
 .achievement-card.nintendo {

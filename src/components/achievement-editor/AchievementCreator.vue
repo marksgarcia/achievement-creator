@@ -34,6 +34,15 @@
         v-if="isMinnMax"
         @change-state="updateMilestone"
       ></base-checkbox>
+      <div class="radio-group" v-if="isMinnMax">
+        <base-radio-button
+          v-for="radio in radioButtons"
+          :key="radio"
+          :text="radio.text"
+          :selected="radio.active"
+          @button-clicked="toggleState(radio.text)"
+        ></base-radio-button>
+      </div>
       <base-checkbox
         text="Rare Achievement"
         :currentState="isRare"
@@ -93,12 +102,31 @@ export default {
       store.dispatch("updateMilestone", input);
     };
 
+    const radioButtons = ref([
+      { text: "Default", active: true },
+      { text: "Light", active: false },
+      { text: "Dark", active: false },
+    ]);
+    const toggleState = (text) => {
+      const buttons = [...radioButtons.value];
+      const refreshedButtons = [];
+      for (let button of buttons) {
+        if (button.text === text) {
+          button.active = true;
+        } else {
+          button.active = false;
+        }
+        refreshedButtons.push(button);
+        radioButtons.value = refreshedButtons
+      }
+    };
     const updateRarity = (input) => {
       store.dispatch("updateRarity", input);
     };
     return {
       isIcon,
       hasImage,
+      toggleState,
       isMinnMax,
       isXbox,
       isRare,
@@ -108,6 +136,7 @@ export default {
       updateRarity,
       activeTab,
       toggleActive,
+      radioButtons,
     };
   },
 };
@@ -192,6 +221,12 @@ form {
     .image-upload:hover {
       background: rgba(#007aff, 0.05);
     }
+  }
+
+  .radio-group {
+    @include flexbox();
+    margin: 1em 0;
+    width: 100%;
   }
 
   .inputs {

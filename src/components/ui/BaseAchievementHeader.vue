@@ -1,5 +1,5 @@
 <template>
-  <h1 :class="brand">
+  <h1 :class="[brand, getTheme]">
     <span class="trophy" v-if="isPS && header !== ''">
       <img :src="require('@/assets/trophies/' + trophy + '.png')" :alt="trophyType" v-if="trophy !== ''" />
     </span>
@@ -29,7 +29,11 @@ export default {
       return currentTrophy;
     })
 
-    return { header, brand, isPS, trophyType, trophy };
+    const getTheme = computed(() => {
+      return store.getters.getTheme;
+    });
+
+    return { header, brand, isPS, trophyType, trophy, getTheme };
   },
 };
 </script>
@@ -49,6 +53,15 @@ h1 {
 h1.minnmax {
   font-family: "Croogla 4F";
   font-size: 24px;
+}
+
+h1.minnmax.light {
+  color: #090A0B;
+  text-shadow: none;
+}
+
+h1.minnmax.dark {
+  color: rgba(#ffffff, 0.8);
 }
 
 h1.xbox {

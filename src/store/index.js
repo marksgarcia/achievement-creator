@@ -3,16 +3,17 @@ import { createStore } from "vuex";
 const store = createStore({
   state() {
     return {
-      image: "",
-      header: "",
-      text: "",
-      points: "",
       brand: "",
+      currentIcon: [],
+      header: "",
+      image: "",
+      isIcon: false,
       isMilestone: false,
       isRare: false,
+      points: "",
+      text: "",
+      theme: "",
       trophy: "",
-      isIcon: false,
-      currentIcon: []
     };
   },
   actions: {
@@ -26,25 +27,28 @@ const store = createStore({
       context.commit("updatePoints", payload);
     },
     updateImage(context, payload) {
-        context.commit("updateImage", payload)
+      context.commit("updateImage", payload);
     },
     updateBrand(context, payload) {
-      context.commit("updateBrand", payload)
+      context.commit("updateBrand", payload);
     },
     updateMilestone(context, payload) {
-      context.commit("updateMilestone", payload)
+      context.commit("updateMilestone", payload);
     },
     updateRarity(context, payload) {
-      context.commit("updateRarity", payload)
+      context.commit("updateRarity", payload);
     },
     updateTrophy(context, payload) {
-      context.commit("updateTrophy", payload)
+      context.commit("updateTrophy", payload);
     },
     updateIcons(context, payload) {
-      context.commit("updateIcons", payload)
+      context.commit("updateIcons", payload);
     },
     updateCurrentIcon(context, payload) {
-      context.commit("updateCurrentIcon", payload)
+      context.commit("updateCurrentIcon", payload);
+    },
+    updateTheme(context, payload) {
+      context.commit("updateTheme", payload)
     }
   },
   mutations: {
@@ -58,26 +62,29 @@ const store = createStore({
       state.points = payload;
     },
     updateImage(state, payload) {
-        state.image = payload
+      state.image = payload;
     },
     updateBrand(state, payload) {
-      state.brand = payload
+      state.brand = payload;
     },
     updateMilestone(state, payload) {
-      state.isMilestone = payload
+      state.isMilestone = payload;
     },
     updateRarity(state, payload) {
-      state.isRare = payload
+      state.isRare = payload;
     },
     updateTrophy(state, payload) {
-      state.trophy = payload
+      state.trophy = payload;
     },
     updateIcons(state, payload) {
-      state.isIcon = payload
+      state.isIcon = payload;
     },
     updateCurrentIcon(state, payload) {
-      state.currentIcon = payload
+      state.currentIcon = payload;
     },
+    updateTheme(state, payload) {
+      state.theme = payload
+    }
   },
   getters: {
     getImage(state) {
@@ -102,13 +109,16 @@ const store = createStore({
       return state.isRare;
     },
     getTrophy(state) {
-      return state.trophy
+      return state.trophy;
     },
     getIsIcon(state) {
-      return state.isIcon
+      return state.isIcon;
     },
     getCurrentIcon(state) {
-      return state.currentIcon
+      return state.currentIcon;
+    },
+    getTheme(state) {
+      return state.theme
     }
   },
 });

@@ -1,9 +1,10 @@
 <template>
-  <section class="card">
+  <section class="card" :class="getTheme">
     <div class="image-slot">
       <slot name="image"></slot>
       <div class="logo-card">
-        <img src="@/assets/logos/minn-max.svg" alt="minn max logo" />
+        <img src="@/assets/logos/minn-max.svg" alt="minn max logo" v-if="getTheme !== 'light'"/>
+        <img src="@/assets/logos/minn-max-white.svg" alt="minn max logo" v-else />
       </div>
     </div>
     <slot name="text"></slot>
@@ -11,19 +12,24 @@
   </section>
 </template>
 <script>
-import {computed} from 'vue'
-import {useStore} from 'vuex'
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
   setup() {
     const store = useStore();
     const hasMilestone = computed(() => {
-      return store.getters.getMilestone
-    })
+      return store.getters.getMilestone;
+    });
+
+    const getTheme = computed(() => {
+      return store.getters.getTheme;
+    });
     return {
-hasMilestone
-    }
-  }
-}
+      hasMilestone,
+      getTheme,
+    };
+  },
+};
 </script>
 <style lang="scss" scoped>
 .card {
@@ -72,6 +78,41 @@ hasMilestone
     padding: 0.2em 0.4em;
     text-transform: lowercase;
     top: 15px;
+    color: $minnmax-orange;
+  }
+
+  /**
+  Light mode
+
+
+  Dark mode
+  img bkdg: rgba(0,0,0,0.4);
+  text and icon rgba(255, 255, 255, 0.8);
+  card: #393b41;
+  logo and milestonne: #090A0B;
+  */
+}
+
+.card.light {
+  .logo-card {
+    background: $minnmax-orange;
+    border: 4px solid #ffffff;
+  }
+
+  .milestone-tag {
+    background: rgba($minnmax-orange, 0.8);
+    color: #ffffff;
+  }
+}
+
+.card.dark {
+  .logo-card {
+    background: #090a0b;
+    border: 4px solid #393b41;
+  }
+
+  .milestone-tag {
+    background: #090A0B;
     color: $minnmax-orange;
   }
 }

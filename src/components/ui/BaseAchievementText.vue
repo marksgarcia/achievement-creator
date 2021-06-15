@@ -1,12 +1,12 @@
 <template>
-  <p :class="brand" v-if="brand === 'xbox'">
+  <p :class="[brand, getTheme]" v-if="brand === 'xbox'">
     <span class="currency">
       G
     </span>
     {{ points }}
     {{ text }}
   </p>
-   <p :class="brand" v-else>
+  <p :class="[brand, getTheme]" v-else>
     {{ text }}
   </p>
 </template>
@@ -26,7 +26,11 @@ export default {
     const points = computed(() => {
       return `${store.getters.getPoints} - `;
     });
-    return { text, brand, points };
+
+    const getTheme = computed(() => {
+      return store.getters.getTheme;
+    });
+    return { text, brand, points, getTheme };
   },
 };
 </script>
@@ -43,7 +47,8 @@ p {
   position: relative;
   width: 100%;
 
-  .currency, .points {
+  .currency,
+  .points {
     display: none;
   }
 }
@@ -52,6 +57,15 @@ p.minnmax {
   font-family: "Croogla 4F";
   font-size: 18px;
   text-shadow: none;
+}
+
+p.minnmax.light {
+  color: #090a0b;
+  text-shadow: none;
+}
+
+p.minnmax.dark {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 p.xbox {

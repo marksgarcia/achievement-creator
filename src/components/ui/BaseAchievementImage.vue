@@ -1,5 +1,5 @@
 <template>
-  <figure :class="[brand, shape]">
+  <figure :class="[brand, shape, getTheme]">
     <font-awesome-icon
       v-if="isIcon && iconType !== undefined && brand !== 'xbox'"
       :icon="[iconClass, iconType]"
@@ -33,18 +33,21 @@ export default {
       return store.getters.getImage;
     });
     const isIcon = computed(() => {
-      return store.getters.getIsIcon
-    })
+      return store.getters.getIsIcon;
+    });
 
     const iconClass = computed(() => {
-      return store.getters.getCurrentIcon.class
-    })
+      return store.getters.getCurrentIcon.class;
+    });
 
     const iconType = computed(() => {
-      return store.getters.getCurrentIcon.icon
-    })
+      return store.getters.getCurrentIcon.icon;
+    });
+    const getTheme = computed(() => {
+      return store.getters.getTheme;
+    });
 
-    return { brand, src, rarity, isIcon, iconClass, iconType };
+    return { brand, src, rarity, isIcon, iconClass, iconType, getTheme };
   },
 };
 </script>
@@ -108,6 +111,14 @@ figure.rounded {
     border: 5px solid rgba(#ffffff, 0.3);
     width: calc(100% - 10px);
   }
+}
+
+figure.rounded.dark {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+figure.rounded.light {
+  background: rgba($minnmax-orange, 0.8);
 }
 
 figure.square {
