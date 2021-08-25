@@ -8,7 +8,7 @@ To test out the web app, be sure to check out the [Demo](https://achievement-cre
 ---
 
 ## Technologies and Packages Used
-This project is built using **Vue 3.0** (Compoosition API), **Font Awesome 5** (with Pro liecnse), **Firebase Hosting**, **Sass** for styles, **Vuex** for state management, **vue-image-crop-upload** to allow for uploading and cropping of images, and **html-to-image** to allow the user to download the achievement that is created as an image. 
+This project is built using **Vue 3.0** (Compoosition API), **Font Awesome 5** (with Pro license), **Firebase Hosting**, **Sass** for styles, **Vuex** for state management, **vue-image-crop-upload** to allow for uploading and cropping of images, and **html-to-image** to allow the user to download the achievement that is created as an image. 
 
 ---
 ## Project setup
