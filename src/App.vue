@@ -1,6 +1,6 @@
 <template>
   <AchievementCreator />
-  <AchievementOutput msg="Welcome to Your Vue.js App" />
+  <AchievementOutput msg="You've got an achievement? Well we've got a generator!" />
 </template>
 
 <script setup>

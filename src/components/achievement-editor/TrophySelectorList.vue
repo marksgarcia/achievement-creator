@@ -50,6 +50,8 @@ ul {
   list-style: none;
   align-items: center;
   justify-content: center;
+  margin: 0.5em 0 !important;
+  padding: 0;
   width: 100%;
 
   li {
@@ -62,7 +64,7 @@ ul {
     filter: grayscale(100%);
     overflow: hidden;
     opacity: 0.7;
-    margin: 0 1em;
+    margin: 0 0.25em;
     @include transition(all 0.3s ease);
     @include transform(scale(0.95));
     height: 4em;

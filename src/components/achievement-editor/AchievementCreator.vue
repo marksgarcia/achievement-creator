@@ -2,55 +2,59 @@
   <form>
     <base-header>Customize Your Achievement</base-header>
     <brand-selector-list></brand-selector-list>
-    <section class="image-or-icons" v-if="!isXbox">
-      <ul>
-        <li
-          :class="{ active: activeTab === 'image' }"
-          @click="toggleActive('image')"
-        >
-          <font-awesome-icon :icon="['fad', 'image']"></font-awesome-icon> Image
-        </li>
-        <li
-          :class="{ active: activeTab === 'icons' }"
-          @click="toggleActive('icons')"
-        >
-          <font-awesome-icon :icon="['fad', 'icons']"></font-awesome-icon> Icons
-        </li>
-      </ul>
-      <div class="image-upload" v-if="hasImage && !isIcon">
-        <base-image-upload></base-image-upload>
-      </div>
-      <div class="icon-picker" v-else>
-        <icon-selector-list></icon-selector-list>
-      </div>
-    </section>
-    <div class="inputs">
-      <base-input label="Achievement Header"></base-input>
-      <base-input label="Achievement Text"></base-input>
-      <base-input label="Achievement Value" v-if="isXbox"></base-input>
-      <base-checkbox
-        text="Add Milestonne Tag"
-        :currentState="isMilestonne"
-        v-if="isMinnMax"
-        @change-state="updateMilestone"
-      ></base-checkbox>
-      <div class="radio-group" v-if="isMinnMax">
-        <base-radio-button
-          v-for="radio in radioButtons"
-          :key="radio"
-          :text="radio.text"
-          :selected="radio.active"
-          @button-clicked="toggleState(radio.text)"
-        ></base-radio-button>
-      </div>
-      <base-checkbox
-        text="Rare Achievement"
-        :currentState="isRare"
-        v-if="isXbox"
-        @change-state="updateRarity"
-      ></base-checkbox>
+    <div class="creator-wrapper">
+      <section class="image-or-icons" v-if="!isXbox">
+        <ul>
+          <li
+            :class="{ active: activeTab === 'image' }"
+            @click="toggleActive('image')"
+          >
+            <font-awesome-icon :icon="['fad', 'image']"></font-awesome-icon>
+            Image
+          </li>
+          <li
+            :class="{ active: activeTab === 'icons' }"
+            @click="toggleActive('icons')"
+          >
+            <font-awesome-icon :icon="['fad', 'icons']"></font-awesome-icon>
+            Icons
+          </li>
+        </ul>
+        <div class="image-upload" v-if="hasImage && !isIcon">
+          <base-image-upload></base-image-upload>
+        </div>
+        <div class="icon-picker" v-else>
+          <icon-selector-list></icon-selector-list>
+        </div>
+      </section>
+      <section class="inputs">
+        <base-input label="Achievement Header"></base-input>
+        <base-input label="Achievement Text"></base-input>
+        <base-input label="Achievement Value" v-if="isXbox"></base-input>
+        <base-checkbox
+          text="Add Milestonne Tag"
+          :currentState="isMilestonne"
+          v-if="isMinnMax"
+          @change-state="updateMilestone"
+        ></base-checkbox>
+        <div class="radio-group" v-if="isMinnMax">
+          <base-radio-button
+            v-for="radio in radioButtons"
+            :key="radio"
+            :text="radio.text"
+            :selected="radio.active"
+            @button-clicked="toggleState(radio.text)"
+          ></base-radio-button>
+        </div>
+        <base-checkbox
+          text="Rare Achievement"
+          :currentState="isRare"
+          v-if="isXbox"
+          @change-state="updateRarity"
+        ></base-checkbox>
+        <trophy-selector-list v-if="isPS"></trophy-selector-list>
+      </section>
     </div>
-    <trophy-selector-list v-if="isPS"></trophy-selector-list>
   </form>
 </template>
 <script setup>
@@ -59,73 +63,79 @@ import TrophySelectorList from "../achievement-editor/TrophySelectorList.vue";
 import IconSelectorList from "../achievement-editor/IconSelectorList.vue";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
-  
-    const store = useStore();
 
-    const activeTab = ref("image");
+const store = useStore();
 
-    const toggleActive = (tab) => {
-      activeTab.value = tab;
-      store.dispatch("updateIcons", tab === "icons");
-    };
+const activeTab = ref("image");
 
-    const hasImage = computed(() => {
-      return store.getters.getBrand !== "xbox";
-    });
+const toggleActive = (tab) => {
+  activeTab.value = tab;
+  store.dispatch("updateIcons", tab === "icons");
+};
 
-    const isIcon = computed(() => {
-      return store.getters.getIsIcon;
-    });
+const hasImage = computed(() => {
+  return store.getters.getBrand !== "xbox";
+});
 
-    const isMinnMax = computed(() => {
-      return store.getters.getBrand === "minnmax";
-    });
+const isIcon = computed(() => {
+  return store.getters.getIsIcon;
+});
 
-    const isMilestonne = ref(false);
+const isMinnMax = computed(() => {
+  return store.getters.getBrand === "minnmax";
+});
 
-    const isXbox = computed(() => {
-      return store.getters.getBrand === "xbox";
-    });
+const isMilestonne = ref(false);
 
-    const isRare = computed(() => {
-      return store.getters.getRarity;
-    });
+const isXbox = computed(() => {
+  return store.getters.getBrand === "xbox";
+});
 
-    const isPS = computed(() => {
-      return store.getters.getBrand === "playstation";
-    });
+const isRare = computed(() => {
+  return store.getters.getRarity;
+});
 
-    const updateMilestone = (input) => {
-      isMilestonne.value = input;
-      store.dispatch("updateMilestone", input);
-    };
+const isPS = computed(() => {
+  return store.getters.getBrand === "playstation";
+});
 
-    const radioButtons = ref([
-      { text: "Default", active: true },
-      { text: "Light", active: false },
-      { text: "Dark", active: false },
-    ]);
+const updateMilestone = (input) => {
+  isMilestonne.value = input;
+  store.dispatch("updateMilestone", input);
+};
 
-    const toggleState = (text) => {
-      const buttons = [...radioButtons.value];
-      const refreshedButtons = [];
-      for (let button of buttons) {
-        if (button.text === text) {
-          button.active = true;
-        } else {
-          button.active = false;
-        }
-        refreshedButtons.push(button);
-        radioButtons.value = refreshedButtons
-      }
-    };
+const radioButtons = ref([
+  { text: "Default", active: true },
+  { text: "Light", active: false },
+  { text: "Dark", active: false },
+]);
 
-    const updateRarity = (input) => {
-      store.dispatch("updateRarity", input);
-    };
+const toggleState = (text) => {
+  const buttons = [...radioButtons.value];
+  const refreshedButtons = [];
+  for (let button of buttons) {
+    if (button.text === text) {
+      button.active = true;
+    } else {
+      button.active = false;
+    }
+    refreshedButtons.push(button);
+    radioButtons.value = refreshedButtons;
+  }
+};
 
+const updateRarity = (input) => {
+  store.dispatch("updateRarity", input);
+};
 </script>
 <style lang="scss" scoped>
+.creator-wrapper {
+  @include flexbox();
+  align-content: flex-start;
+  align-items: flex-start;
+  justify-content: space-between;
+
+}
 form {
   background: #ffffff;
   border-radius: 30px;
@@ -146,11 +156,12 @@ form {
 
   .image-or-icons {
     @include flexbox();
-    align-items: center;
+    align-items: flex-start;
+    align-content: flex-start;
     justify-content: center;
     flex-wrap: wrap;
     @include transition(all 0.3s ease);
-    height: min-content;
+    height: 20em;
     width: 20em;
 
     ul {
@@ -215,8 +226,9 @@ form {
 
   .inputs {
     @include flexbox();
+    align-items: flex-start;
     flex-wrap: wrap;
-    flex: 2;
+    flex: 1;
   }
 }
 </style>
