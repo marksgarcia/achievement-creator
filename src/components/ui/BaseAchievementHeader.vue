@@ -6,11 +6,9 @@
     {{ header }}
   </h1>
 </template>
-<script>
+<script setup>
 import { computed } from "vue";
 import { useStore } from "vuex";
-export default {
-  setup() {
     const store = useStore();
     const header = computed(() => {
       return store.getters.getHeader;
@@ -32,10 +30,6 @@ export default {
     const getTheme = computed(() => {
       return store.getters.getTheme;
     });
-
-    return { header, brand, isPS, trophyType, trophy, getTheme };
-  },
-};
 </script>
 <style lang="scss" scoped>
 h1 {

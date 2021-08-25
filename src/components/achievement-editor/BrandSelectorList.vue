@@ -21,48 +21,39 @@
     </li>
   </ul>
 </template>
-<script>
+<script setup>
 import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
-export default {
-  setup() {
-    const store = useStore();
-    const activeBrand = ref("minnmax");
-    const brands = [
-      {
-        name: "minnmax",
-        src: require("@/assets/logos/minn-max.svg"),
-        icon: null,
-      },
-      {
-        name: "nintendo",
-        src: require("@/assets/logos/switch-logo.svg"),
-        icon: null,
-      },
-      {
-        name: "playstation",
-        src: null,
-        icon: "playstation",
-      },
-      {
-        name: "xbox",
-        src: null,
-        icon: "xbox",
-      },
-    ];
-    onMounted(() => {
-      store.dispatch("updateBrand", activeBrand.value);
-    });
-    const updateActive = (brand) => {
-      activeBrand.value = brand;
-      store.dispatch("updateBrand", activeBrand.value);
-    };
-    return {
-      activeBrand,
-      brands,
-      updateActive,
-    };
+const store = useStore();
+const activeBrand = ref("minnmax");
+const brands = [
+  {
+    name: "minnmax",
+    src: require("@/assets/logos/minn-max.svg"),
+    icon: null,
   },
+  {
+    name: "nintendo",
+    src: require("@/assets/logos/switch-logo.svg"),
+    icon: null,
+  },
+  {
+    name: "playstation",
+    src: null,
+    icon: "playstation",
+  },
+  {
+    name: "xbox",
+    src: null,
+    icon: "xbox",
+  },
+];
+onMounted(() => {
+  store.dispatch("updateBrand", activeBrand.value);
+});
+const updateActive = (brand) => {
+  activeBrand.value = brand;
+  store.dispatch("updateBrand", activeBrand.value);
 };
 </script>
 <style lang="scss" scoped>

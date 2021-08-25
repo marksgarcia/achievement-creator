@@ -53,15 +53,13 @@
     <trophy-selector-list v-if="isPS"></trophy-selector-list>
   </form>
 </template>
-<script>
+<script setup>
 import BrandSelectorList from "../achievement-editor/BrandSelectorList.vue";
 import TrophySelectorList from "../achievement-editor/TrophySelectorList.vue";
 import IconSelectorList from "../achievement-editor/IconSelectorList.vue";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
-export default {
-  components: { BrandSelectorList, TrophySelectorList, IconSelectorList },
-  setup() {
+  
     const store = useStore();
 
     const activeTab = ref("image");
@@ -107,6 +105,7 @@ export default {
       { text: "Light", active: false },
       { text: "Dark", active: false },
     ]);
+
     const toggleState = (text) => {
       const buttons = [...radioButtons.value];
       const refreshedButtons = [];
@@ -120,26 +119,11 @@ export default {
         radioButtons.value = refreshedButtons
       }
     };
+
     const updateRarity = (input) => {
       store.dispatch("updateRarity", input);
     };
-    return {
-      isIcon,
-      hasImage,
-      toggleState,
-      isMinnMax,
-      isXbox,
-      isRare,
-      isPS,
-      isMilestonne,
-      updateMilestone,
-      updateRarity,
-      activeTab,
-      toggleActive,
-      radioButtons,
-    };
-  },
-};
+
 </script>
 <style lang="scss" scoped>
 form {

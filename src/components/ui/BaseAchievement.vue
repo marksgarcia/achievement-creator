@@ -1,25 +1,20 @@
 <template>
-  <div class="achievement-card" :class="[mode, getTheme]">
+  <div class="achievement-card" :class="[props.mode, getTheme]">
     <slot></slot>
   </div>
 </template>
-<script>
-import { computed } from "vue";
+<script setup>
+import { computed, defineProps } from "vue";
 import { useStore } from "vuex";
-export default {
-  props: ["mode"],
-  setup() {
-    const store = useStore();
-    const imageUploaded = computed(() => {
-      return store.getters.getImage !== "";
-    });
+const props = defineProps({
+  mode: String,
+});
 
-    const getTheme = computed(() => {
-      return store.getters.getTheme;
-    });
-    return { imageUploaded, getTheme};
-  },
-};
+const store = useStore();
+const getTheme = computed(() => {
+  return store.getters.getTheme;
+});
+
 </script>
 <style lang="scss" scoped>
 .achievement-card.minnmax {

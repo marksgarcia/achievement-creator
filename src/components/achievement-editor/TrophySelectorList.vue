@@ -13,44 +13,35 @@
     </li>
   </ul>
 </template>
-<script>
+<script setup>
 import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
-export default {
-  setup() {
-    const store = useStore();
-    const activeTrophy = ref("bronze");
-    const trophies = [
-      {
-        name: "bronze",
-        src: require("@/assets/trophies/bronze.png"),
-      },
-      {
-        name: "silver",
-        src: require("@/assets/trophies/silver.png"),
-      },
-      {
-        name: "gold",
-        src: require("@/assets/trophies/gold.png"),
-      },
-      {
-        name: "platinum",
-        src: require("@/assets/trophies/platinum.png"),
-      },
-    ];
-    onMounted(() => {
-      store.dispatch("updateTrophy", activeTrophy.value);
-    });
-    const updateActive = (trophy) => {
-      activeTrophy.value = trophy;
-      store.dispatch("updateTrophy", activeTrophy.value);
-    };
-    return {
-      activeTrophy,
-      trophies,
-      updateActive,
-    };
+const store = useStore();
+const activeTrophy = ref("bronze");
+const trophies = [
+  {
+    name: "bronze",
+    src: require("@/assets/trophies/bronze.png"),
   },
+  {
+    name: "silver",
+    src: require("@/assets/trophies/silver.png"),
+  },
+  {
+    name: "gold",
+    src: require("@/assets/trophies/gold.png"),
+  },
+  {
+    name: "platinum",
+    src: require("@/assets/trophies/platinum.png"),
+  },
+];
+onMounted(() => {
+  store.dispatch("updateTrophy", activeTrophy.value);
+});
+const updateActive = (trophy) => {
+  activeTrophy.value = trophy;
+  store.dispatch("updateTrophy", activeTrophy.value);
 };
 </script>
 <style lang="scss" scoped>
@@ -62,7 +53,7 @@ ul {
   width: 100%;
 
   li {
-      background: #eaeaea;
+    background: #eaeaea;
     border: 1px solid #d7d7d7;
     border-radius: 15px;
     @include flexbox();

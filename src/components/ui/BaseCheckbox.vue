@@ -8,26 +8,28 @@
         ></font-awesome-icon
       ></transition-group>
     </span>
-    <span class="text">{{ text }}</span>
+    <span class="text">{{ props.text }}</span>
   </div>
 </template>
-<script>
-import { ref, computed } from "vue";
-import {useStore} from 'vuex'
-export default {
-  props: ["text", "currentState"],
-  setup(props, { emit }) {
-    const store = useStore();
-    const checkState = props.currentState !== undefined ? ref(props.currentState) : ref(false);
-    const brand = computed(() => {
-      return store.getters.getBrand;
-    }) 
-    const changeState = () => {
-      checkState.value = !checkState.value;
-      emit("change-state", checkState.value);
-    };
-    return { brand, checkState, changeState };
-  },
+<script setup>
+import { ref, computed, defineProps, defineEmits } from "vue";
+import { useStore } from "vuex";
+const props = defineProps({
+  text: String,
+  currentState: String,
+});
+
+const emits = defineEmits(["change-state"]);
+
+const store = useStore();
+const checkState =
+  props.currentState !== undefined ? ref(props.currentState) : ref(false);
+const brand = computed(() => {
+  return store.getters.getBrand;
+});
+const changeState = () => {
+  checkState.value = !checkState.value;
+  emits("change-state", checkState.value);
 };
 </script>
 <style lang="scss" scoped>
@@ -37,9 +39,9 @@ div {
   justify-content: flex-start;
 
   .check {
-      @include flexbox();
-      justify-content: center;
-      align-items: center;
+    @include flexbox();
+    justify-content: center;
+    align-items: center;
     border-radius: 3px;
     border: 1px solid #d7d7d7;
     margin-right: 0.5em;
@@ -47,7 +49,6 @@ div {
     width: 1.5em;
     @include transition(all 0.3s ease);
   }
-
 }
 
 .xbox {
@@ -72,18 +73,18 @@ div {
 
 .appear-enter-from,
 .appear-leave-to {
-    opacity: 0;
-    @include transform(rotate(180deg));
+  opacity: 0;
+  @include transform(rotate(180deg));
 }
 
 .appear-enter-to,
 .appear-leave-from {
-    opacity: 1;
-    @include transform(rotate(0deg));
+  opacity: 1;
+  @include transform(rotate(0deg));
 }
 
 .appear-enter-active,
 .appear-leave-active {
- @include transition(all 0.3s ease);
+  @include transition(all 0.3s ease);
 }
 </style>

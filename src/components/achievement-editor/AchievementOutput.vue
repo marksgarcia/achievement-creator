@@ -58,7 +58,7 @@
     </button>
   </section>
 </template>
-<script>
+<script setup>
 import * as htmlToImage from "html-to-image";
 import FileSaver from "file-saver";
 import { computed } from "vue";
@@ -67,33 +67,26 @@ import NintendoCard from "../achievement-cards/NintendoCard";
 import MinnmaxCard from "../achievement-cards/MinnmaxCard";
 import XboxCard from "../achievement-cards/XboxCard";
 import PlaystationCard from "../achievement-cards/PlaystationCard";
-export default {
-  components: { NintendoCard, MinnmaxCard, XboxCard, PlaystationCard },
-  setup() {
-    const store = useStore();
-    const saveImage = () => {
-      htmlToImage
-        .toBlob(document.getElementById("achievement"))
-        .then(function(blob) {
-          FileSaver.saveAs(blob, "achievement.png");
-        });
-    };
-
-    const setBrand = computed(() => {
-      return store.getters.getBrand;
+const store = useStore();
+const saveImage = () => {
+  htmlToImage
+    .toBlob(document.getElementById("achievement"))
+    .then(function(blob) {
+      FileSaver.saveAs(blob, "achievement.png");
     });
-
-    const getTheme = computed(() => {
-      return store.getters.getTheme;
-    });
-
-    const filled = computed(() => {
-      return store.getters.getHeader !== "" && store.getters.getText !== "";
-    });
-
-    return { saveImage, filled, setBrand, getTheme };
-  },
 };
+
+const setBrand = computed(() => {
+  return store.getters.getBrand;
+});
+
+const getTheme = computed(() => {
+  return store.getters.getTheme;
+});
+
+const filled = computed(() => {
+  return store.getters.getHeader !== "" && store.getters.getText !== "";
+});
 </script>
 <style lang="scss" scoped>
 .wrapper {

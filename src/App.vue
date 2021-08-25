@@ -3,17 +3,9 @@
   <AchievementOutput msg="Welcome to Your Vue.js App" />
 </template>
 
-<script>
+<script setup>
 import AchievementCreator from "./components/achievement-editor/AchievementCreator.vue";
 import AchievementOutput from "./components/achievement-editor/AchievementOutput.vue";
-
-export default {
-  name: "App",
-  components: {
-    AchievementCreator,
-    AchievementOutput,
-  },
-};
 </script>
 
 <style lang="scss">

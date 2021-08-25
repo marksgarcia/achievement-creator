@@ -1,28 +1,23 @@
 <template>
   <div @click="toggleState">
-    <span class="button" :class="{'selected': selected}"></span>
+    <span class="button" :class="{ selected: selected }"></span>
     <span class="text">{{ text }}</span>
   </div>
 </template>
-<script>
-import { ref, computed } from "vue";
-import {useStore} from 'vuex'
-export default {
-  props: ["text", "selected"],
-  setup(props, {emit}) {
-    const store = useStore();
-    const buttonSelected = ref(resetButton);
-    const toggleState = () => {
-      store.dispatch('updateTheme', props.text.toLowerCase())
-      console.log(store.state)
-      emit('button-clicked')
-    };
+<script setup>
+import { defineProps, defineEmits } from "vue";
+import { useStore } from "vuex";
+const props = defineProps({
+  text: String,
+  selected: String,
+});
 
-    const resetButton = computed(() => {
-        return props.selected;
-    })
-    return { buttonSelected, toggleState };
-  },
+const emits = defineEmits(["button-clicked"]);
+const store = useStore();
+
+const toggleState = () => {
+  store.dispatch("updateTheme", props.text.toLowerCase());
+  emits("button-clicked");
 };
 </script>
 <style lang="scss" scoped>
@@ -87,7 +82,7 @@ div {
   }
 
   .text {
-      margin-right: 1em;
+    margin-right: 1em;
   }
 }
 </style>

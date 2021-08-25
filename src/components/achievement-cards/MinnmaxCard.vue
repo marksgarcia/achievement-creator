@@ -11,25 +11,12 @@
     <span class="milestone-tag" v-if="hasMilestone">Milestonne</span>
   </section>
 </template>
-<script>
+<script setup>
 import { computed } from "vue";
 import { useStore } from "vuex";
-export default {
-  setup() {
     const store = useStore();
-    const hasMilestone = computed(() => {
-      return store.getters.getMilestone;
-    });
-
-    const getTheme = computed(() => {
-      return store.getters.getTheme;
-    });
-    return {
-      hasMilestone,
-      getTheme,
-    };
-  },
-};
+    const hasMilestone = computed(() => store.getters.getMilestone);
+    const getTheme = computed(() => store.getters.getTheme);
 </script>
 <style lang="scss" scoped>
 .card {

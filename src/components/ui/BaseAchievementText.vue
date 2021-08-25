@@ -10,29 +10,24 @@
     {{ text }}
   </p>
 </template>
-<script>
+<script setup>
 import { computed } from "vue";
 import { useStore } from "vuex";
-export default {
-  setup() {
-    const store = useStore();
-    const text = computed(() => {
-      return store.getters.getText;
-    });
-    const brand = computed(() => {
-      return store.getters.getBrand;
-    });
+const store = useStore();
+const text = computed(() => {
+  return store.getters.getText;
+});
+const brand = computed(() => {
+  return store.getters.getBrand;
+});
 
-    const points = computed(() => {
-      return `${store.getters.getPoints} - `;
-    });
+const points = computed(() => {
+  return `${store.getters.getPoints} - `;
+});
 
-    const getTheme = computed(() => {
-      return store.getters.getTheme;
-    });
-    return { text, brand, points, getTheme };
-  },
-};
+const getTheme = computed(() => {
+  return store.getters.getTheme;
+});
 </script>
 <style lang="scss" scoped>
 p {
@@ -75,7 +70,6 @@ p.xbox {
   align-items: center;
   position: relative;
   justify-content: flex-start;
-  width: calc(100% - 38px);
 
   .currency {
     background: #ffffff;

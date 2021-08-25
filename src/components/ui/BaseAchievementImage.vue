@@ -1,5 +1,5 @@
 <template>
-  <figure :class="[brand, shape, getTheme]">
+  <figure :class="[brand, props.shape, getTheme]">
     <font-awesome-icon
       v-if="isIcon && iconType !== undefined && brand !== 'xbox'"
       :icon="[iconClass, iconType]"
@@ -16,12 +16,12 @@
   </figure>
 </template>
 
-<script>
-import { computed } from "vue";
+<script setup>
+import { computed, defineProps } from "vue";
 import { useStore } from "vuex";
-export default {
-  props: ["shape"],
-  setup() {
+  const props = defineProps({
+    shape: String
+  })
     const store = useStore();
     const brand = computed(() => {
       return store.getters.getBrand;
@@ -46,10 +46,6 @@ export default {
     const getTheme = computed(() => {
       return store.getters.getTheme;
     });
-
-    return { brand, src, rarity, isIcon, iconClass, iconType, getTheme };
-  },
-};
 </script>
 <style lang="scss" scoped>
 figure {

@@ -1,32 +1,34 @@
 <template>
   <label>
     <span class="label-text">{{ inputLabel }}</span>
-    <input type="text" v-model="inputValue" @keyup="captureValue" />
+    <input
+      type="text"
+      :aria-label="`${inputLabel} text input field`"
+      v-model="inputValue"
+      @keyup="captureValue"
+    />
   </label>
 </template>
-<script>
-import { ref } from "vue";
+<script setup>
+import { ref, defineProps } from "vue";
 import { useStore } from "vuex";
-export default {
-  props: ["label"],
-  setup(props) {
-    const store = useStore();
-    const inputLabel = ref(props.label);
-    const inputValue = ref("");
+const props = defineProps({
+  label: String,
+});
+const store = useStore();
+const inputLabel = ref(props.label);
+const inputValue = ref("");
 
-    const captureValue = () => {
-      const label = props.label;
-      const value = inputValue.value;
+const captureValue = () => {
+  const label = props.label;
+  const value = inputValue.value;
 
-      const objs = {
-        "Achievement Header": "updateHeader",
-        "Achievement Text": "updateText",
-        "Achievement Value": "updatePoints"
-      };
-      store.dispatch(objs[label], value);
-    };
-    return { inputLabel, inputValue, captureValue };
-  },
+  const objs = {
+    "Achievement Header": "updateHeader",
+    "Achievement Text": "updateText",
+    "Achievement Value": "updatePoints",
+  };
+  store.dispatch(objs[label], value);
 };
 </script>
 <style lang="scss" scoped>
@@ -40,7 +42,7 @@ label {
     padding: 0.25em;
     font-size: 0.8em;
     position: absolute;
-    top: -0.6em;
+    top: -0.7em;
     left: 10px;
   }
 
@@ -54,11 +56,11 @@ label {
   }
 }
 label:focus-within {
-    span {
-        color: #007aff;
-    }
-    input {
-        border: 1px solid #007aff;
-    }
+  span {
+    color: #007aff;
+  }
+  input {
+    border: 1px solid #007aff;
+  }
 }
 </style>

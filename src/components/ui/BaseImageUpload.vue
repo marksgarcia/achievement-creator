@@ -14,7 +14,7 @@
         <p v-else>Upload Image</p>
       </span>
     </keep-alive>
-    <image-upload
+    <my-upload
       field="img"
       @crop-success="cropSuccess"
       @crop-upload-success="cropUploadSuccess"
@@ -24,23 +24,18 @@
       :width="100"
       :height="100"
       url="https://httpbin.org/post"
-      langType="en"
+      :langType="en"
       ki="0"
       :params="params"
       :headers="headers"
       img-format="png"
-    ></image-upload>
+    ></my-upload>
   </div>
 </template>
-<script>
+<script setup>
 import myUpload from "vue-image-crop-upload";
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
-export default {
-  components: {
-    "image-upload": myUpload,
-  },
-  setup() {
     const store = useStore();
     const imgUploaded = ref(false);
     const show = ref(false);
@@ -90,22 +85,6 @@ export default {
     const currentImage = computed(() => {
       return store.getters.getImage;
     });
-
-    return {
-      imgUploaded,
-      params,
-      headers,
-      show,
-      toggleShow,
-      en,
-      cropSuccess,
-      cropUploadSuccess,
-      cropUploadFail,
-      imgDataUrl,
-      currentImage,
-    };
-  },
-};
 </script>
 <style lang="scss" scoped>
 .hidden-upload {
